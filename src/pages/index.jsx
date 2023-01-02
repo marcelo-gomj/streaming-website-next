@@ -5,10 +5,14 @@ import { BannerHome } from "../components/BannerHome";
 import { RowContainer } from '../components/RowContainer';
 import { RowItems } from "../components/RowItems";
 import { RowTrailers } from "../components/RowTrailers";
+import { Modal } from "../components/Modal";
+import { TrailerIframe } from "../components/TrailerIframe";
 
 import { fetcher } from '../services/clientContentful';
 import { fetcherTmdb } from '../services/tmdb';
 import { generateCanonicalUrl } from "../utils/generateCanonical";
+
+import home from "../styles/home.module.css";
 
 export default function Home({ highlightsBanner, headerContent, trailersContent, moreContent }) {
    const [isTrailer, setIsTrailer] = useState(false);
@@ -38,7 +42,7 @@ export default function Home({ highlightsBanner, headerContent, trailersContent,
             <link rel="canonical" href={generateCanonicalUrl()} />
 
          </Head>
-         <main>
+         <main className={home["content"]}>
             <BannerHome
                items={highlightsBanner.items}
                isTrailer={isTrailer}
@@ -94,11 +98,16 @@ export default function Home({ highlightsBanner, headerContent, trailersContent,
                            <RowItems items={content.list.items} />
                         </RowContainer>
                      )
-
                   }
                }
             )}
 
+            <Modal
+               isModal={isTrailer}
+               setModal={setIsTrailer}
+            >
+               <TrailerIframe videoID={isTrailer} />
+            </Modal>
          </main>
       </>
    )

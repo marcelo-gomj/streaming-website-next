@@ -1,4 +1,4 @@
-import { fetcher } from '../../services/clientContentful';
+import { fetcher } from '../../../services/clientContentful';
 
 export default async function handler(req, res){
    const { query } = req;

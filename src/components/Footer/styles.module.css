@@ -1,0 +1,17 @@
+.container{
+    display: flex;
+    position: sticky;
+    width: 100%;
+    background: rgba(8, 8, 8);
+    justify-content: center;
+    padding: 1% 0;
+}
+
+.container div{
+    position: relative;
+    color: rgb(230, 230, 230);
+}
+
+.container span{
+    font-size: 1.2rem;
+}

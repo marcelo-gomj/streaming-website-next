@@ -1,0 +1,155 @@
+* {
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+   font-family: 'Roboto', sans-serif;
+   text-rendering: optimizeLegibility;
+   -webkit-tap-highlight-color: transparent;
+   list-style: none;
+   user-select: none;
+}
+
+:root {
+   /* green */
+   --green-normal: rgb(70, 200, 70);
+   --green-700: rgb(40, 200, 40);
+   --green-500: rgb(20, 200, 20);
+   --green-400: rgb(0, 200, 0);
+
+   /* black */
+   --black: rgba(0, 0, 0);
+   --black-990: rgb(2, 2, 2);
+   --black-950: rgb(8, 8, 8);
+   --black-900: rgb(10, 10, 10);
+   --black-850: rgba(15, 15, 15);
+   --black-800: rgb(20, 20, 20);
+   --black-gradient: linear-gradient(transparent, rgba(10, 10, 10, 0.4), rgba(10, 10, 10, 0.8), rgb(10, 10, 10));
+
+   /* white */
+   --white: white;
+   --white-800: rgb(230, 230, 230);
+   --white-400: rgb(150, 150, 150);
+   --white-border: 2px solid white;
+
+   /* silver */
+   --silver-100: rgba(255, 255, 255, 0.1);
+   --silver-500: rgba(255, 255, 255, 0.5);
+   --silver-600: rgba(255, 255, 255, 0.6);
+   --silver-700: rgba(255, 255, 255, 0.7);
+
+   /* text */
+   --text-999: white;
+   --text-800: rgb(230, 230, 230);
+   --text-700: rgb(220, 220, 220);
+   --text-600: rgba(200, 200, 200);
+   --text-500: rgb(150, 150, 150);
+
+   /* color */
+   --background-black-100: rgb(10, 10, 10);
+   --background-color: rgba(0, 0, 0);
+   --border-white: 2px solid white;
+
+   /* green */
+   --green-800: rgb(70, 240, 70);
+
+   /* border */
+   --border-box: 2px solid rgba(255, 255, 255, 0.15);
+
+   /* gray */
+   --gray-100: rgb(8, 8, 8);
+
+   /* text */
+   --color-text-header: rgb(240, 240, 240);
+   --text-999: white;
+   --text-800: rgb(220, 220, 220);
+   --text-disable: rgb(160, 160, 160);
+
+   /* actives */
+   --active-items: white;
+
+   /* hover */
+   --active-hover: white;
+   --gray-200: rgb(20, 20, 20);
+}
+
+html,
+body,
+main {
+   background: var(--background-color);
+}
+
+body{
+   max-width: 1500px;
+   margin: 0 auto;
+}
+
+main {
+   position: relative;
+}
+
+::-webkit-scrollbar {
+   width: 6px;
+}
+
+::-webkit-scrollbar-track {
+   background-color: rgba(0, 0, 0, 0.3);
+}
+
+::selection {
+   background-color: rgb(70, 200, 70);
+}
+
+::-webkit-scrollbar-thumb {
+   background: rgba(50, 200, 50);
+   border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+   background: rgba(70, 200, 70);
+}
+
+a {
+   color: inherit;
+   text-decoration: none;
+}
+
+@media (min-width: 1501px) {
+   * {
+      font-size: 16px;
+   }
+}
+@media (max-width: 1100px) {
+   * {
+      font-size: 15px;
+   }
+}
+
+@media (max-width: 768px) {
+   * {
+      font-size: 15px;
+   }
+}
+
+@media (max-width: 580px) {
+   * {
+      font-size: 14px;
+   }
+}
+
+@media (max-width: 480px) {
+   * {
+      font-size: 12px;
+   }
+}
+
+@media (max-width: 320px) {
+   * {
+      font-size: 11px;
+   }
+}
+
+@media screen and (max-width: 280px) {
+   * {
+      font-size: 9px;
+   }
+}

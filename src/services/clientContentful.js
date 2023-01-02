@@ -5,7 +5,7 @@ const original = contentful.createClient({
    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN_ORIGINAL,
 })
 
-const main = contenful.createClient({
+const main = contentful.createClient({
    space : process.env.CONTENTFUL_SPACE_MAIN,
    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN_MAIN
 })

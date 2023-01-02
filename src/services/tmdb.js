@@ -1,6 +1,9 @@
 // verify the numbers digits
 const twoDigits = (number) => {
+   if(number === 0) number = 1;
+
    const digit = '' + number;
+
    return digit.length === 1 ? ('0' + number) : digit;
 }
 
@@ -42,6 +45,7 @@ export async function fetcherTmdb(mode, id, trailer, version = 4, params, langua
       '&language=' + (language || 'en-US'),
       params || ''
    ]
+
    const data = await fetch(url.join(''));
 
    if (data.ok) {

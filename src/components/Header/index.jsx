@@ -4,9 +4,6 @@ import header from './header.module.css';
 
 import { SearchHeader } from './SearchHeader';
 
-import Close from '../../assets/close.svg';
-import Hambunger from '../../assets/hamburger.svg';
-
 export function Header() {
    const [headerColor, setHeaderColor] = useState(false);
    const [isMobileMenu, setMobileMenu] = useState(false);

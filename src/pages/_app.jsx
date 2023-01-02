@@ -11,6 +11,7 @@ export const SizeScreen = createContext(null);
 
 function StreamingWebsite({ Component, pageProps }) {
    const [sizes, setSizes] = useState(false);
+   
    nProgress.configure({ showSpinner: false })
 
    useEffect(() => {

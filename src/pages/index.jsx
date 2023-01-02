@@ -4,12 +4,13 @@ import { useState } from "react";
 import { BannerHome } from "../components/BannerHome";
 import { RowContainer } from '../components/RowContainer';
 import { RowItems } from "../components/RowItems";
+import { RowTrailers } from "../components/RowTrailers";
 
 import { fetcher } from '../services/clientContentful';
 import { fetcherTmdb } from '../services/tmdb';
 import { generateCanonicalUrl } from "../utils/generateCanonical";
 
-export default function Home({ highlightsBanner, headerContent }) {
+export default function Home({ highlightsBanner, headerContent, trailersContent }) {
    const [isTrailer, setIsTrailer] = useState(false);
 
    const sizes = {
@@ -64,6 +65,18 @@ export default function Home({ highlightsBanner, headerContent }) {
                   }
                })
             }
+
+            <RowContainer
+               key={3232}
+               title={'Filmes em Breve'}
+               length={trailersContent.length}
+               screens={sizesTrailer}
+            >
+               <RowTrailers 
+                  items={trailersContent} 
+                  getTrailer={setIsTrailer}
+               />
+            </RowContainer>
 
          </main>
       </>
@@ -122,6 +135,7 @@ export async function getServerSideProps() {
    ]
 
    const explorerQuery = await fetcherTmdb('discover', 'movie', false, 3);
+
    const trailersContent = explorerQuery.results.filter(item => {
       return item.backdrop_path && item.original_language === 'en';
    }).slice(0, 12);

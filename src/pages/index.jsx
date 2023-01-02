@@ -2,14 +2,28 @@ import Head from "next/head";
 import { useState } from "react";
 
 import { BannerHome } from "../components/BannerHome";
+import { RowContainer } from '../components/RowContainer';
+import { RowItems } from "../components/RowItems";
 
 import { fetcher } from '../services/clientContentful';
 import { fetcherTmdb } from '../services/tmdb';
-
 import { generateCanonicalUrl } from "../utils/generateCanonical";
 
-export default function Home({ highlightsBanner }) {
+export default function Home({ highlightsBanner, headerContent }) {
    const [isTrailer, setIsTrailer] = useState(false);
+
+   const sizes = {
+      "500" : 1.5,
+      "768" : 2,
+      "1100" : 2.5,
+      "default" : 3
+   }
+
+   const sizesTrailer = {
+      "768" : 1,
+      "1100" : 1.5,
+      "default" : 2
+   }
 
    return (
       <>
@@ -29,6 +43,27 @@ export default function Home({ highlightsBanner }) {
                isTrailer={isTrailer}
                getTrailer={setIsTrailer}
             />
+
+            {
+               headerContent.map((content) => {
+                  if (content.list.items.length) {
+                     const itemsLength = content.list.items.length;
+
+                     return (
+                        <RowContainer
+                           key={content.title}
+                           title={content.title}
+                           length={itemsLength}
+                           more={content.more}
+                           screens={sizes}
+                        >
+                           <RowItems items={content.list.items} />
+                        </RowContainer>
+                     )
+
+                  }
+               })
+            }
 
          </main>
       </>

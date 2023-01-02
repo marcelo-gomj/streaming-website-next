@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
-import { fetcher } from '../../services/clientContentful';
+
+import { ListResults } from './ListResults.jsx';
+
 import search from './search.module.css';
 import Router from 'next/router';
 import Search from '../../assets/search.svg';
 import Close from '../../assets/close.svg';
 
-import { ListResults } from './ListResults.jsx';
 
 
 export function SearchHeader() {

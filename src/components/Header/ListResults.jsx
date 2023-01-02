@@ -1,8 +1,9 @@
 import Link from 'next/link';
-import search from './search.module.css';
-import { parserUrl } from '../../utils/slug';
 
+import { parserUrl } from '../../utils/slug';
 import { ImageTmdb } from '../ImageTmdb';
+
+import search from './search.module.css';
 
 export function ListResults({ results }) {
 

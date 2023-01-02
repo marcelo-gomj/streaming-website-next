@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import header from './header.module.css';
 
 import { SearchHeader } from './SearchHeader';
+
+import header from './header.module.css';
 
 export function Header() {
    const [headerColor, setHeaderColor] = useState(false);

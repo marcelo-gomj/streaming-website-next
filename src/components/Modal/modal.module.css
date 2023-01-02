@@ -1,0 +1,35 @@
+.container{
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 999;
+
+    animation: openModal 500ms ease;
+}
+
+@keyframes openModal{
+    from{
+        opacity: 0.2;
+    }to{
+        opacity: 1;
+    }
+}
+
+.container button{
+    background: none;
+    border: none;
+}
+
+.close{
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    width: 5.5vmin;
+    cursor: pointer;
+}

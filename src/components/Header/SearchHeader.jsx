@@ -43,7 +43,7 @@ export function SearchHeader() {
 
    async function getResultsList(input) {
 
-      const res = await fetch('/api/' + input);
+      const res = await fetch('/api/search/' + input);
       const response = await res.json();
 
       setResults(response.items);

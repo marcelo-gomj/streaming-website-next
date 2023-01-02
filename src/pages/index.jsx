@@ -10,7 +10,7 @@ import { fetcher } from '../services/clientContentful';
 import { fetcherTmdb } from '../services/tmdb';
 import { generateCanonicalUrl } from "../utils/generateCanonical";
 
-export default function Home({ highlightsBanner, headerContent, trailersContent }) {
+export default function Home({ highlightsBanner, headerContent, trailersContent, moreContent }) {
    const [isTrailer, setIsTrailer] = useState(false);
 
    const sizes = {
@@ -77,6 +77,27 @@ export default function Home({ highlightsBanner, headerContent, trailersContent 
                   getTrailer={setIsTrailer}
                />
             </RowContainer>
+
+            {
+               moreContent.map((content) => {
+                  if(content.list.items.length){
+                     const itemsLength = content.list.items.length;
+
+                     return (
+                        <RowContainer
+                           key={content.title}
+                           title={content.title}
+                           more={content.more}
+                           length={itemsLength}
+                           screens={sizes}
+                        >
+                           <RowItems items={content.list.items} />
+                        </RowContainer>
+                     )
+
+                  }
+               }
+            )}
 
          </main>
       </>

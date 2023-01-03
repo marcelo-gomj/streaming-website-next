@@ -3,6 +3,11 @@ import Head from "next/head";
 import { generateCanonicalUrl } from "../../utils/generateCanonical";
 import { fetcher } from "../../services/clientContentful";
 
+import { CardItem } from '../../components/CardItem';
+import { FilterCategories } from '../../components/FilterCategories';
+
+import categories from '../../styles/categories.module.css';
+
 export default function CategoryPage({ list, categoryTitle, totalPages, currentPage, currentFilter }) {
    const fixTitle = {
       "filmes" : "Filmes",
@@ -14,6 +19,49 @@ export default function CategoryPage({ list, categoryTitle, totalPages, currentP
 
    const titleHeader = fixTitle[categoryTitle];
 
+   function numeration(page, isActive, name) {
+      const active = isActive ? categories.activePage : '';
+
+      return (
+         <Link 
+            href={`${categoryTitle}/?page=${page}&filter=${currentFilter}`} 
+            key={page} className={active}>{page}
+         </Link>
+      )
+   }
+
+   function handlePagination(index, list) {
+      // const { total_pages, page, name } = list;
+      const page = currentPage;
+      const total_pages = totalPages;
+      const name = 'more'
+
+      const current = index + 1
+      const matchedItem = page == current;
+      const divisor = 5
+      const squareItem = numeration(current, matchedItem, name);
+
+      if (total_pages !== 1) {
+         if (page < divisor && current <= divisor) {
+            return squareItem;
+
+         } else if (page >= divisor && current === 1 && total_pages !== current) {
+            return [numeration(1, matchedItem, name), <span key={2}>...</span>]
+
+         } else if (page > (total_pages - (divisor - 1)) && current > (total_pages - divisor)) {
+            return squareItem;
+
+         } else if (current === total_pages) {
+            return [<span key={current - 1}>...</span>, numeration(current, false, name)]
+
+         } else {
+            if (current > (page - 3) && current < (page + 3)) {
+               return squareItem;
+            }
+         }
+      }
+   }
+
    return (
       <>
          <Head>
@@ -21,11 +69,58 @@ export default function CategoryPage({ list, categoryTitle, totalPages, currentP
 
             <meta
                name="description"
-               content={`Melhores ${titleHeader}`}
+               content={`Tudo sobre ${titleHeader}`}
             />
 
             <link rel="canonical" href={generateCanonicalUrl()} />
          </Head>
+
+         <main>
+         <main>
+            <section className={categories['container']}>
+               <header className={categories['header']}>
+
+                  <div className={categories['title']}>
+                     <h1>{titleHeader}</h1>
+                  </div>
+
+                  <FilterCategories 
+                     category={categoryTitle}
+                     current={currentFilter}
+                  />
+               </header>
+
+               <ul className={categories.items}>
+                  {
+                     list.items.map((item) => {
+                        return (
+                           <CardItem
+                              item={item}
+                              key={item.fields.id}
+                           />
+                        )
+                     })
+                  }
+               </ul>
+            </section>
+
+            <section className={categories['pagination']}>
+               
+               <div>Página {currentPage} de {totalPages}</div>
+
+               <nav className={categories['controllers']}>
+                  {
+                     Array.from(
+                        { length: totalPages },
+                        (_, index) => {
+                           return handlePagination(index, list)
+                        }
+                     )
+                  }
+               </nav>
+            </section>
+         </main>
+         </main>
       </>
    )
 }

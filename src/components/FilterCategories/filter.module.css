@@ -1,0 +1,63 @@
+.filter-container{
+   position: relative;
+   color: white;
+   height: 100%;
+   font-size: 1.2rem;
+   width: 20rem;
+}
+
+.filter-active{
+   height: 100%;
+   border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.filter-active, .filter-list a{
+   display: block;
+   color: white;
+   padding: .8rem 0;
+   text-align: center;
+   border-radius: 6px;
+   cursor: pointer;
+}
+
+.filter-list{
+   display: none;
+   position: absolute;
+   background: black;
+   border: 2px solid white;
+   top: 100%;
+   width: 100%;
+   border-radius: 6px;
+   z-index: 900;
+}
+
+.filter-container:hover .filter-active{
+   background-color: rgb(10, 10, 10);
+   opacity: 0.6;
+
+   transition: all 300ms ease;
+}
+
+.filter-container:hover .filter-list{
+   display: block;
+
+   animation: appearSelector 500ms ease 0s;
+}
+
+@keyframes appearSelector{
+   0%{
+      opacity: 0;
+   }100%{
+      opacity: 1;
+   }
+}
+
+.filter-list a:hover{
+   background-color: rgb(15, 15, 15);
+}
+
+@media (max-width: 600px) {
+   .filter-container{
+      width: 15rem;
+   }
+}

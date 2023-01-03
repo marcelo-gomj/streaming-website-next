@@ -1,0 +1,128 @@
+.container{
+    /* margin: 0 auto;
+    max-width: 1500px; */
+    margin:  3rem 2rem 0;
+}
+
+.content, .pagination{
+    margin: 5rem 3rem;    
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4rem 1rem 3rem;
+}
+
+.title h1{
+    color: var(--text-999);
+    font-weight: 500;
+    font-size: 2.5rem;
+}
+
+.title p{
+    color: var(--text-999);
+}
+
+.content{
+    display: block;
+    position: relative;
+}
+
+.items{
+    display: grid;
+    position: relative;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 4rem 0.5rem;
+}
+
+.pagination{
+    display: block;
+    text-align: center;
+    /* margin: 3rem; */
+}
+
+.pagination > div {
+    color: var(--white);
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 2.5% 0;
+}
+
+.controllers{
+    width: 100%;
+}
+
+.controllers a{
+    color: var(--text-999);
+    padding: .6rem .8rem;
+    margin: 0 0.5rem;
+    border: 2px solid rgb(255, 255, 255, 0.2);
+    background-color: rgb(15, 15, 15);
+    font-size: 1.3rem;
+    font-weight: 500;
+    border-radius: 4px;
+
+    transition: all 0.3s ease; 
+}
+
+.controllers a:hover{
+    border-color: white;
+}
+
+.controllers span{
+    color: var(--text-999);
+    margin: 0 1%;
+    font-size: 1.2rem;
+}
+
+.activePage{
+    border-color: white!important;
+    background-color: black!important;
+}
+
+@media (max-width: 1100px) {
+    .items{
+        grid-template-columns: repeat(5, 1fr);
+    } 
+}
+
+@media screen and (max-width: 768px) {
+    .items{
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .header{
+        padding: 9rem 1rem 1rem;
+    }
+
+    .content, .pagination{
+        margin: 5rem 1rem;    
+    }
+
+    .pagination > div {
+        margin: 5% 0;
+    }
+    .controllers a{
+        padding: 2%;
+        margin: 1% 1.5%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .items{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .header{
+        flex-direction: column;
+    }
+
+    .title{
+        margin-bottom: 2rem;
+    }
+}

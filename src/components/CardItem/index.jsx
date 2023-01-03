@@ -10,7 +10,9 @@ export function CardItem({ item }){
 
    const { fields } = item;
    const { certification } = fields;
+   
    const overview = useMemo(() => reduceOverview(fields), [item]);
+
    const url = parserUrl(fields.url, {
       id: fields.id,
       mode: ( fields.mode || 'tv') ,

@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 
 import { generateCanonicalUrl } from "../../utils/generateCanonical";
 import { fetcher } from "../../services/clientContentful";

@@ -63,10 +63,11 @@ export default function CategoryPage({ list, categoryTitle, totalPages, currentP
       }
    }
 
+   const titlePage = {titleHeader} + "- pag." + {currentPage}; 
    return (
       <>
          <Head>
-            <title>{titleHeader} - pag. {currentPage}</title>
+            <title>{titlePage}</title>
 
             <meta
                name="description"

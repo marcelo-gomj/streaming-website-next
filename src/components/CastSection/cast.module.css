@@ -1,0 +1,89 @@
+.container{
+   width: 100%;
+   color: white;
+   padding: 4rem;
+}
+
+.container header{
+   display: flex;
+   justify-content: center;
+   width: 100%;
+   margin: 0 0 4rem;
+}
+
+.container h2{
+   font-weight: 500;
+   font-size: 2rem;
+}
+
+.cast-list{
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   gap: 1rem ;
+
+}
+
+.cast-item{
+   display: flex;
+   position: relative;
+   flex-direction: column;
+   width: 15%;
+   text-align: center;
+   border: 2px solid rgba(255, 255, 255, 0.1);
+   border-radius: 10px;
+   padding: 1rem;
+   cursor: pointer;
+
+   transition: border-color 0.5s ease;
+}
+
+.cast-item:hover{
+   border-color: white;
+}
+
+.cast-item h3{
+   font-size: 1.1rem;
+   font-weight: 500;
+   margin: 1rem 0;
+   color: rgba(255, 255, 255, 0.9);
+}
+
+.cast-item p{
+   color: rgba(255, 255, 255, 0.5);
+}
+
+.cast-profile{
+   position: relative;
+   border-radius: 50%;
+   overflow: hidden;
+   width: 100%;
+   height: 10rem;
+}
+
+.cast-profile svg{
+   width: 80%;
+   height: 80%;
+   stroke: white;
+   /* fill: rgba(255, 255, 255, 0.123); */
+
+}
+
+@media screen and (max-width: 1200px ) {
+   .cast-item{
+      width: 23%;
+      gap: 2%;
+   }
+}
+
+@media screen and (max-width: 768px ) {
+   .container{
+      padding: 4rem 1.5rem;
+   }
+}
+
+@media screen and (max-width: 600px) {
+   .cast-item{
+      width: 30%;
+   }
+}

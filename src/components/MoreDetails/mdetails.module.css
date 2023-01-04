@@ -1,0 +1,50 @@
+.container{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    max-width: 1100px;
+    width: 100%;
+    margin: 3vmin auto;
+}
+
+.container h3{
+    color: var(--text-999);
+    font-weight: 500;
+    text-align: center;
+    padding: 2% 0;
+    font-size: 1.3rem;
+}
+
+.infos{
+    display: grid;
+    grid-template-columns: repeat(4,25%);
+    gap: 0.4rem;
+    margin: 1% 0;
+    text-align: center;
+}
+
+.infos li{
+    margin: 4vmin 0;
+    padding: .6rem;
+}
+
+.infos p:first-child{
+    color: var(--text-999);
+    margin: 2vmin 0;
+}
+
+.infos p:last-child{
+    color: var(--white-400);
+}
+
+@media screen and (max-width: 768px){
+    .infos{
+        grid-template-columns: repeat(3, 33.33%);
+    }
+}
+
+@media screen and (max-width: 480px){
+    .infos{
+        grid-template-columns: repeat(2, 50%);
+    }
+}

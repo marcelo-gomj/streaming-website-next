@@ -1,0 +1,81 @@
+.container{
+    display: flex;
+    width: 100%;
+    max-width: 1100px;
+    margin: 4% 0 0%;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    padding-bottom: 1.5%;
+    z-index: 10;
+}
+
+.container p{
+    color: var(--text-999);
+    font-size: .9rem;
+    text-align: center;
+}
+
+.container p:first-child{
+    margin-bottom: 10%;
+}
+
+.container p:last-child{
+    color: var(--text-500);
+}
+
+.container li > div{
+    display: flex;
+    justify-content: center;
+    color: var(--white);
+    font-weight: bold;
+    font-size: .93rem;
+
+    margin-bottom: 7%;
+}
+
+.container div > div:not(.track-0){
+    padding: 1% 3%;
+    border-radius: 2px;
+}
+
+.track-0{
+    background-color: rgb(0, 177, 80);
+    padding: 1% 1.25vmin;
+}
+
+.track-1{
+    background-color: rgb(0, 205, 255);
+}
+
+.track-2{
+    background-color: rgb(255, 204, 0);
+}
+
+.track-3{
+    background-color: rgb(255, 102, 0);
+}
+
+.track-4{
+    background-color:rgb(254, 0, 0);
+}
+
+.track-5{
+    background-color: var(--black);
+    border: 1px solid var(--white);
+}
+
+
+@media screen and (max-width: 600px) {
+    .container li{
+        width: 33.33%;
+        padding: 2.2vmin;;
+    }
+
+}
+
+@media screen and (max-width: 320px){
+    .container p{
+        font-size: 0.8rem;
+    }
+}

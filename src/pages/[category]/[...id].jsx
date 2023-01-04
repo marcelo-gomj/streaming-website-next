@@ -9,7 +9,9 @@ import { reduceContent } from "../../utils/reduceTmdbContentApi";
 import { generateCanonicalUrl } from "../../utils/generateCanonical";
 
 import { CastSection } from "../../components/CastSection";
-import { FooterContent } from "../../components/FooterContent" 
+import { FooterContent } from "../../components/FooterContent";
+import { MoreDetails } from "../../components/MoreDetails";
+import { HeaderContent } from "../../components/HeaderContent";
 
 const Modal = dynamic(() =>
    import('../../components/Modal').then(mod => mod.Modal)
@@ -29,12 +31,16 @@ export default function ContentPage({
    seasonSelected,
 }) {
    const [isModal, setIsModal] = useState(false)
+   
+   console.log(seasonSelected)
 
-   const content = {
-      title: contents.title || contents.name,
+   const info = {
+      title: ( contents.title || contents.name ) + ( seasonSelected ? ` - ${seasonSelected.season_number}ª Temporada` : '' ),
+      poster: seasonSelected?.poster_path || contents.poster_path,
       canonical: generateCanonicalUrl(),
       castItems: actorList?.items[0].fields.tmdb.credits,
-      recommends: recommendsList, 
+      recommends: recommendsList,
+      overview: seasonSelected?.overview || contents.overview,
    }
 
    return (
@@ -45,8 +51,24 @@ export default function ContentPage({
             <link rel="canonical" href={contents.canonical} />
          </Head>
 
-         <main>
-            <FooterContent recommends={content.recommends} category={category} />
+         <main style={{ overflow: "hidden" }}>
+            <HeaderContent
+               content={info}
+               item={contents}
+            />
+
+            <MoreDetails item={contents} />
+
+            <CastSection
+               castItems={info.castItems}
+               itemID={contents.id}
+            />
+
+            <FooterContent
+               recommends={info.recommends}
+               category={category}
+               seasonSelected={seasonSelected}
+            />
 
 
             {
@@ -57,17 +79,14 @@ export default function ContentPage({
                   <TrailerIframe
                      videosList={contents.videos}
                      videoID={{
-                        id: content.id,
+                        id: info.id,
                         type
                      }}
                   />
                </Modal>
             }
 
-            <CastSection
-               castItems={content.castItems}
-               itemID={contents.id}
-            />
+
          </main>
       </>
    )
@@ -132,14 +151,15 @@ export async function getStaticProps({ params }) {
       return popularItemsList.items.filter(item => item.fields.id !== id)
    }
 
-   function matchSeasonByMode(matchedSesson, content) {
+   function matchSeasonByMode(seasons, seasonNumber) {
+      const [season] = seasons.filter(season => season.season_number === seasonNumber);
 
       return {
-         ...matchedSesson,
-         id: content.id,
-         name: content.name,
-         season_id: matchedSesson.id,
-         seasson_name: `${content.name} - ${content.name}`,
+         ...season,
+         id: season.id,
+         name: season.name,
+         season_id: season.id,
+         seasson_name: `${season.name}`,
       }
    }
 
@@ -162,7 +182,7 @@ export async function getStaticProps({ params }) {
    const tmdbContents = await fetcherTmdb(type, tmdbID, false, 3, queryTmdbExtraContent);
 
    const seasonSelected = modeContent === 'season' ?
-      matchSeasonByMode(tmdbContents[seasonNumber], tmdbContents) : null;
+      matchSeasonByMode(tmdbContents.seasons, seasonNumber) : null;
 
    const reducedContentFinal = reduceContent(tmdbContents);
 

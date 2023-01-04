@@ -9,7 +9,7 @@ export default async function handler(req, res){
    let data;
 
    if(lang){
-      data  = await fetcherTmdb(type, id, true, 3, false, false);
+      data  = await fetcherTmdb(type, id, true, 3, '', 'en-US');
    }else{
       data = await fetcherTmdb(type, id, true, 3);
    }

@@ -18,8 +18,9 @@ export function TrailerIframe({ videoID, videosList }) {
          }
 
          if (!trailerResults?.results.length) {
-            const res = await fetch('/api/trailer?type=' + type + '&id=' + id +"&lang=en");
+            const res = await fetch('/api/trailer?type=' + type + '&id=' + id + "&lang=en");
             trailerResults = await res.json();
+            console.log(trailerResults)
          }
 
          setPathVideo(trailerResults?.results[0]?.key);

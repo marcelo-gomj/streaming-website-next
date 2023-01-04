@@ -6,7 +6,7 @@ import TrailerIcon from '../../assets/trailer.svg';
 import style from './header.module.css';
 
 export function Header({
-   content, item,
+   content, item, setIsModal
 }) {
    const [fixBug, setFixBug] = useState(false);
 
@@ -53,6 +53,7 @@ export function Header({
 
                <button
                   className={style.trailerBtn}
+                  onClick={() => setIsModal(true)}
                >
                   <span className={style.trailerIcon}><TrailerIcon /></span>
                   Assistir trailer

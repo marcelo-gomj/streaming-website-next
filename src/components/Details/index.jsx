@@ -42,15 +42,15 @@ export function ContentDetails({ item }) {
 
    return (
       <ul className={details.container}>
-         <li tabIndex={11}>
+         <li tabIndex={0}>
             <p>{(item.runtime || item.episode_run_time[0])} min</p>
             <p>Duração</p>
          </li>
-         <li tabIndex={12}>
+         <li tabIndex={0}>
             <p>{item.vote_average.toFixed(1)}</p>
             <p>Avaliação</p>
          </li>
-         <li tabIndex={13}>
+         <li tabIndex={0}>
             <div>
                <div className={details[`${setColorCert(item.rating)}`]}>
                   {item.rating}
@@ -58,7 +58,7 @@ export function ContentDetails({ item }) {
             </div>
             <p>Classificação</p>
          </li>
-         <li tabIndex={14}>
+         <li tabIndex={0}>
             <p>{date?.slice(0, 4) || 'desconhecido'}</p>
             <p>Ano</p>
          </li>

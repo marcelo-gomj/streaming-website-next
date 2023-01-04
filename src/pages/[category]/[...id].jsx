@@ -32,8 +32,6 @@ export default function ContentPage({
 }) {
    const [isModal, setIsModal] = useState(false)
    
-   console.log(seasonSelected)
-
    const info = {
       title: ( contents.title || contents.name ) + ( seasonSelected ? ` - ${seasonSelected.season_number}ª Temporada` : '' ),
       poster: seasonSelected?.poster_path || contents.poster_path,
@@ -55,6 +53,7 @@ export default function ContentPage({
             <HeaderContent
                content={info}
                item={contents}
+               setIsModal={setIsModal}
             />
 
             <MoreDetails item={contents} />
@@ -79,7 +78,7 @@ export default function ContentPage({
                   <TrailerIframe
                      videosList={contents.videos}
                      videoID={{
-                        id: info.id,
+                        id: contents.id,
                         type
                      }}
                   />

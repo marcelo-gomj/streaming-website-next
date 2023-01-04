@@ -5,7 +5,7 @@ import { ImageTmdb } from '../ImageTmdb';
 import style from './header.module.css';
 
 export function HeaderContent({
-   content, item, 
+   content, item, setIsModal
 }) {
 
    return (
@@ -21,6 +21,7 @@ export function HeaderContent({
             <Header
                content={content}
                item={item}
+               setIsModal={setIsModal}
             />
 
             <ContentDetails item={item} />

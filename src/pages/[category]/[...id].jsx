@@ -9,6 +9,7 @@ import { reduceContent } from "../../utils/reduceTmdbContentApi";
 import { generateCanonicalUrl } from "../../utils/generateCanonical";
 
 import { CastSection } from "../../components/CastSection";
+import { FooterContent } from "../../components/FooterContent" 
 
 const Modal = dynamic(() =>
    import('../../components/Modal').then(mod => mod.Modal)
@@ -28,12 +29,12 @@ export default function ContentPage({
    seasonSelected,
 }) {
    const [isModal, setIsModal] = useState(false)
-   
-   console.log(actorList)
+
    const content = {
-      title : contents.title || contents.name,
-      canonical : generateCanonicalUrl(),
-      castItems : actorList?.items[0].fields.tmdb.credits
+      title: contents.title || contents.name,
+      canonical: generateCanonicalUrl(),
+      castItems: actorList?.items[0].fields.tmdb.credits,
+      recommends: recommendsList, 
    }
 
    return (
@@ -45,8 +46,10 @@ export default function ContentPage({
          </Head>
 
          <main>
-            
-         {
+            <FooterContent recommends={content.recommends} category={category} />
+
+
+            {
                <Modal
                   isModal={isModal}
                   setModal={setIsModal}
@@ -61,12 +64,10 @@ export default function ContentPage({
                </Modal>
             }
 
-            <CastSection 
+            <CastSection
                castItems={content.castItems}
                itemID={contents.id}
             />
-
-
          </main>
       </>
    )
@@ -131,19 +132,19 @@ export async function getStaticProps({ params }) {
       return popularItemsList.items.filter(item => item.fields.id !== id)
    }
 
-   function matchSeasonByMode( matchedSesson, content ){
+   function matchSeasonByMode(matchedSesson, content) {
 
       return {
          ...matchedSesson,
-         id : content.id,
-         name : content.name, 
+         id: content.id,
+         name: content.name,
          season_id: matchedSesson.id,
          seasson_name: `${content.name} - ${content.name}`,
       }
    }
 
    const { category, id } = params;
-   const [ identityParam, seasonParam ] = id;
+   const [identityParam, seasonParam] = id;
 
    const { type, tmdbID } = splitUrlParamsId(identityParam);
    const seasonNumber = hasSeasonNumber(seasonParam);
@@ -151,7 +152,7 @@ export async function getStaticProps({ params }) {
 
    const actorList = await fetcher({
       content_type: 'content',
-      "fields.id" : tmdbID, 
+      "fields.id": tmdbID,
       select: "fields.tmdb"
    });
 
@@ -160,14 +161,14 @@ export async function getStaticProps({ params }) {
    const queryTmdbExtraContent = "&append_to_response=videos,release_dates,content_ratings";
    const tmdbContents = await fetcherTmdb(type, tmdbID, false, 3, queryTmdbExtraContent);
 
-   const seasonSelected = modeContent === 'season' ? 
-   matchSeasonByMode( tmdbContents[seasonNumber], tmdbContents ) : null;
+   const seasonSelected = modeContent === 'season' ?
+      matchSeasonByMode(tmdbContents[seasonNumber], tmdbContents) : null;
 
    const reducedContentFinal = reduceContent(tmdbContents);
 
    return {
       props: {
-         contents : reducedContentFinal,
+         contents: reducedContentFinal,
          category,
          modeContent,
          type,

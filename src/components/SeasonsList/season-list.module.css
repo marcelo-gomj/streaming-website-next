@@ -1,0 +1,54 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    margin: 3% 2% 2%;
+}
+
+.container li a{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
+
+.container li + li{
+    margin-top: 1%;
+}
+
+.container .poster{
+    position: relative;
+    width: 8vmin;
+    height: 12vmin;
+    margin-right: 3rem;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.seasonLink{
+    position: relative;
+    color: var(--white);
+    padding: 1rem 2rem;
+    margin: 1rem 0 ;
+    border-radius: 10px;
+    border: 2px solid var(--black-800);
+    transition: all 300ms ease;
+}
+
+.seasonLink:hover{
+    border-color: var(--white);
+}
+
+.seasonLink:active{
+    border-color: transparent;
+}
+
+.seasonLink h3 {
+    font-weight: 400;
+    padding: 0 0 1rem;
+}
+
+.seasonLink div > div{
+    color: var(--white-400);
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+

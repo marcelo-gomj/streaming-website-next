@@ -12,6 +12,9 @@ import { CastSection } from "../../components/CastSection";
 import { FooterContent } from "../../components/FooterContent";
 import { MoreDetails } from "../../components/MoreDetails";
 import { HeaderContent } from "../../components/HeaderContent";
+import { SeasonsList } from '../../components/SeasonsList';
+import { ModalChoose } from "../../components/ModalChoose";
+
 
 const Modal = dynamic(() =>
    import('../../components/Modal').then(mod => mod.Modal)
@@ -30,18 +33,22 @@ export default function ContentPage({
    recommendsList,
    seasonSelected,
 }) {
-   const [isModal, setIsModal] = useState(false)
-   
+   const [isModal, setIsModal] = useState(false);
+   const [watchModal, setWatchModal] = useState(false);
+
    const info = {
-      title: ( contents.title || contents.name ) + ( seasonSelected ? ` - ${seasonSelected.season_number}ª Temporada` : '' ),
+      title: (contents.title || contents.name) + (seasonSelected ? ` - ${seasonSelected.season_number}ª Temporada` : ''),
       poster: seasonSelected?.poster_path || contents.poster_path,
       canonical: generateCanonicalUrl(),
       castItems: actorList?.items[0].fields.tmdb.credits,
       recommends: recommendsList,
       overview: seasonSelected?.overview || contents.overview,
+      modalName: seasonSelected !== undefined ? "Assistir em : " : "Selecione a Temporada",
       seasonSelected
    }
 
+   console.log(seasonSelected)
+   
    return (
       <>
          <Head>
@@ -54,7 +61,9 @@ export default function ContentPage({
             <HeaderContent
                content={info}
                item={contents}
+               seasonSelected={seasonSelected}
                setIsModal={setIsModal}
+               setWatchModal={setWatchModal}
             />
 
             <MoreDetails item={contents} />
@@ -85,6 +94,26 @@ export default function ContentPage({
                   />
                </Modal>
             }
+
+            <ModalChoose
+               watchModal={watchModal}
+               closeModal={setWatchModal}
+               opacity={0.6}
+               hdTitle={info.modalName}
+            >
+               {
+                  seasonSelected === false ?
+
+                     <SeasonsList
+                        seasons={contents.seasons}
+                        poster={contents.poster_path}
+                     />
+
+                     :
+
+                     ""
+               }
+            </ModalChoose>
 
 
          </main>
@@ -152,6 +181,8 @@ export async function getStaticProps({ params }) {
    }
 
    function matchSeasonByMode(seasons, seasonNumber) {
+      if (!seasonNumber) return false;
+
       const [season] = seasons.filter(season => season.season_number === seasonNumber);
 
       return {
@@ -168,7 +199,6 @@ export async function getStaticProps({ params }) {
 
    const { type, tmdbID } = splitUrlParamsId(identityParam);
    const seasonNumber = hasSeasonNumber(seasonParam);
-   const modeContent = seasonNumber ? 'season' : type;
 
    const actorList = await fetcher({
       content_type: 'content',
@@ -181,7 +211,7 @@ export async function getStaticProps({ params }) {
    const queryTmdbExtraContent = "&append_to_response=videos,release_dates,content_ratings";
    const tmdbContents = await fetcherTmdb(type, tmdbID, false, 3, queryTmdbExtraContent);
 
-   const seasonSelected = modeContent === 'season' ?
+   const seasonSelected = type === 'tv' ?
       matchSeasonByMode(tmdbContents.seasons, seasonNumber) : null;
 
    const reducedContentFinal = reduceContent(tmdbContents);
@@ -190,7 +220,6 @@ export async function getStaticProps({ params }) {
       props: {
          contents: reducedContentFinal,
          category,
-         modeContent,
          type,
          actorList,
          recommendsList,

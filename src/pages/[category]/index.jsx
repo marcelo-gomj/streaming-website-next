@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 
-import { GenerateCanonicalUrl } from "../../utils/GenerateCanonical";
+// import { GenerateCanonicalUrl } from "../../utils/GenerateCanonical";
 import { fetcher } from "../../services/clientContentful";
 
 import { CardItem } from '../../components/CardItem';
@@ -64,7 +64,7 @@ export default function CategoryPage({ list, categoryTitle, totalPages, currentP
    }
 
    const titlePage = {titleHeader} + "- pag." + {currentPage}; 
-   const canonical = GenerateCanonicalUrl();
+   // const canonical = GenerateCanonicalUrl();
 
    return (
       <>
@@ -76,7 +76,7 @@ export default function CategoryPage({ list, categoryTitle, totalPages, currentP
                content={`Tudo sobre ${titleHeader}`}
             />
 
-            <link rel="canonical" href={canonical} />
+            {/* <link rel="canonical" href={canonical} /> */}
          </Head>
 
          <main>

@@ -6,7 +6,7 @@ import { fetcher } from "../../services/clientContentful";
 import { fetcherTmdb } from "../../services/tmdb";
 import { parserUrl } from "../../utils/slug";
 import { reduceContent } from "../../utils/reduceTmdbContentApi"; 
-import { GenerateCanonicalUrl } from "../../utils/GenerateCanonical";
+// import { GenerateCanonicalUrl } from "../../utils/GenerateCanonical";
 
 import { CastSection } from "../../components/CastSection";
 import { FooterContent } from "../../components/FooterContent";
@@ -44,14 +44,14 @@ export default function ContentPage({
       modalName: seasonSelected !== undefined ? "Assistir em : " : "Selecione a Temporada",
       seasonSelected
    }
-   const canonical = GenerateCanonicalUrl();
+   // const canonical = GenerateCanonicalUrl();
 
    return (
       <>
          <Head>
             <title>{contents.title}</title>
             <meta name="description" content={contents.description} />
-            <link rel="canonical" href={canonical} />
+            {/* <link rel="canonical" href={canonical} /> */}
          </Head>
 
          <main style={{ overflow: "hidden" }}>

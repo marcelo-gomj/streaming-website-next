@@ -39,6 +39,7 @@ export default function ContentPage({
       castItems: actorList?.items[0].fields.tmdb.credits,
       recommends: recommendsList,
       overview: seasonSelected?.overview || contents.overview,
+      seasonSelected
    }
 
    return (

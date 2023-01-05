@@ -24,7 +24,10 @@ export function HeaderContent({
                setIsModal={setIsModal}
             />
 
-            <ContentDetails item={item} />
+            <ContentDetails 
+               item={item} 
+               seasonSelected={content.seasonSelected}
+            />
          </header>
          
       </section>

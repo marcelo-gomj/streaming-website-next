@@ -1,7 +1,5 @@
-import Router from 'next/router';
-
-export function generateCanonicalUrl(){
+export function generateCanonicalUrl(router){
     const url = process.env.NEXT_PUBLIC_URL_BASE;
-    const canonicalUrl = (url + (Router.asPath === "/" ? "": Router.asPath)).split("?")[0];
+    const canonicalUrl = (url + (router.asPath === "/" ? "": router.asPath)).split("?")[0];
     return canonicalUrl;
 }

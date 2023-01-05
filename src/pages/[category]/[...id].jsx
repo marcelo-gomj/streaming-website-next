@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 
@@ -35,11 +36,12 @@ export default function ContentPage({
 }) {
    const [isModal, setIsModal] = useState(false);
    const [watchModal, setWatchModal] = useState(false);
+   const router = useRouter();
 
    const info = {
       title: (contents.title || contents.name) + (seasonSelected ? ` - ${seasonSelected.season_number}ª Temporada` : ''),
       poster: seasonSelected?.poster_path || contents.poster_path,
-      canonical: generateCanonicalUrl(),
+      canonical: generateCanonicalUrl(router),
       castItems: actorList?.items[0].fields.tmdb.credits,
       recommends: recommendsList,
       overview: seasonSelected?.overview || contents.overview,
@@ -47,8 +49,6 @@ export default function ContentPage({
       seasonSelected
    }
 
-   console.log(seasonSelected)
-   
    return (
       <>
          <Head>

@@ -10,13 +10,12 @@ import { TrailerIframe } from "../components/TrailerIframe";
 
 import { fetcher } from '../services/clientContentful';
 import { fetcherTmdb } from '../services/tmdb';
-import { generateCanonicalUrl } from "../utils/generateCanonical";
+import { GenerateCanonicalUrl } from "../utils/GenerateCanonical";
 
 import home from "../styles/home.module.css";
 
 export default function Home({ highlightsBanner, headerContent, trailersContent, moreContent }) {
    const [isTrailer, setIsTrailer] = useState(false);
-
    const sizes = {
       "500" : 1.5,
       "768" : 2,
@@ -30,6 +29,7 @@ export default function Home({ highlightsBanner, headerContent, trailersContent,
       "default" : 2
    }
 
+   const canonical = GenerateCanonicalUrl()
    return (
       <>
          <Head>
@@ -39,7 +39,7 @@ export default function Home({ highlightsBanner, headerContent, trailersContent,
                content={`Tudo sobre filmes, séries, desenhos, animações.`}
             />
 
-            <link rel="canonical" href={generateCanonicalUrl()} />
+            <link rel="canonical" href={canonical} />
 
          </Head>
          <main className={home["content"]}>

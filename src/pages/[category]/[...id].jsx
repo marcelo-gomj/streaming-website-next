@@ -1,13 +1,12 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 
 import { fetcher } from "../../services/clientContentful";
 import { fetcherTmdb } from "../../services/tmdb";
 import { parserUrl } from "../../utils/slug";
-import { reduceContent } from "../../utils/reduceTmdbContentApi";
-import { generateCanonicalUrl } from "../../utils/generateCanonical";
+import { reduceContent } from "../../utils/reduceTmdbContentApi"; 
+import { GenerateCanonicalUrl } from "../../utils/GenerateCanonical";
 
 import { CastSection } from "../../components/CastSection";
 import { FooterContent } from "../../components/FooterContent";
@@ -28,7 +27,6 @@ const TrailerIframe = dynamic(() =>
 export default function ContentPage({
    contents,
    category,
-   modeContent,
    type,
    actorList,
    recommendsList,
@@ -36,25 +34,24 @@ export default function ContentPage({
 }) {
    const [isModal, setIsModal] = useState(false);
    const [watchModal, setWatchModal] = useState(false);
-   const router = useRouter();
 
    const info = {
       title: (contents.title || contents.name) + (seasonSelected ? ` - ${seasonSelected.season_number}ª Temporada` : ''),
       poster: seasonSelected?.poster_path || contents.poster_path,
-      canonical: generateCanonicalUrl(router),
       castItems: actorList?.items[0].fields.tmdb.credits,
       recommends: recommendsList,
       overview: seasonSelected?.overview || contents.overview,
       modalName: seasonSelected !== undefined ? "Assistir em : " : "Selecione a Temporada",
       seasonSelected
    }
+   const canonical = GenerateCanonicalUrl();
 
    return (
       <>
          <Head>
             <title>{contents.title}</title>
             <meta name="description" content={contents.description} />
-            <link rel="canonical" href={contents.canonical} />
+            <link rel="canonical" href={canonical} />
          </Head>
 
          <main style={{ overflow: "hidden" }}>
@@ -127,7 +124,7 @@ export async function getStaticPaths() {
       select: 'fields.id,fields.mode,fields.url,fields.title,fields.informations',
       order: '-fields.popularity',
 
-      limit: 60
+      limit: 2
    })
 
    const paths = res.items.map(({ fields }) => {

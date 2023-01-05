@@ -17,7 +17,6 @@ export function ContentDetails({ item, seasonSelected }) {
 
    const date = seasonSelected?.air_date || (item.first_air_date || item.release_date);
 
-   console.log(item)
    return (
       <ul className={details.container}>
          <li tabIndex={0}>

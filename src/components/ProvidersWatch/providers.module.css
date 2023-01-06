@@ -1,0 +1,42 @@
+.section{
+   display: flex;
+   flex-direction: column;
+   padding: 0 2rem 0;
+   gap: 1rem;
+   margin-bottom: 2rem; 
+}
+
+.container{
+   padding: 0rem 2rem;
+   border-radius: 6px;
+}
+
+.providers-mode{
+   color: white;
+   margin: 1rem 0;
+}
+
+.streaming-item{
+   display: flex;
+   color: white;
+   align-items: center;
+   gap: 2rem;
+   margin: 1rem 0;
+   border-radius: 6px;
+   padding: 1rem;
+}
+
+.streaming-item:hover{
+   background: rgb(15, 15, 15);
+}
+
+.streaming-image{
+   position: relative;
+   width: 3rem;
+   height: 3rem;
+}
+
+.streaming-image img{
+   border-radius: 6px;
+   border: 2px solid white;
+}

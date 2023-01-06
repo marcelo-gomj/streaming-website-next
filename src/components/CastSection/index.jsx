@@ -9,13 +9,13 @@ export function CastSection({ castItems, itemID }){
          </header>
          
          <ul className={cast["cast-list"]}>
-            { castItems.map(person => (
+            { castItems ? castItems.map(person => (
                   <CastItem
                      key={person.id} 
                      person={person} 
                      itemID={itemID} 
                   />
-               )) 
+               ))  : ''
             }
          </ul>
       </section>

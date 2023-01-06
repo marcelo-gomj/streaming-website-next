@@ -45,7 +45,7 @@ export function HeaderContent({
                         className={style["watch-button"]}
                         onClick={() => setWatchModal(true)}
                      >
-                        Assistir
+                        Disponível em
                      </button>
 
                      :

@@ -14,6 +14,7 @@ import { MoreDetails } from "../../components/MoreDetails";
 import { HeaderContent } from "../../components/HeaderContent";
 import { SeasonsList } from '../../components/SeasonsList';
 import { ModalChoose } from "../../components/ModalChoose";
+import { ProvidersWatch } from "../../components/ProvidersWatch";
 
 
 const Modal = dynamic(() =>
@@ -31,14 +32,17 @@ export default function ContentPage({
    actorList,
    recommendsList,
    seasonSelected,
+   providersWatcher
 }) {
    const [isModal, setIsModal] = useState(false);
    const [watchModal, setWatchModal] = useState(false);
+   
+   console.log(providersWatcher);
 
    const info = {
       title: (contents.title || contents.name) + (seasonSelected ? ` - ${seasonSelected.season_number}ª Temporada` : ''),
       poster: seasonSelected?.poster_path || contents.poster_path,
-      castItems: actorList?.items[0].fields.tmdb.credits,
+      castItems: actorList?.items[0]?.fields.tmdb.credits,
       recommends: recommendsList,
       overview: seasonSelected?.overview || contents.overview,
       modalName: seasonSelected !== undefined ? "Assistir em : " : "Selecione a Temporada",
@@ -108,7 +112,7 @@ export default function ContentPage({
 
                      :
 
-                     ""
+                     <ProvidersWatch providers={contents.providersWatcher}/>
                }
             </ModalChoose>
 
@@ -191,6 +195,15 @@ export async function getStaticProps({ params }) {
       }
    }
 
+   function reduceProviresWatcherList(results){
+      if(results){
+         const {BR, US} = results
+         return BR || US || null;
+      }
+      
+      return null;
+   }
+
    const { category, id } = params;
    const [identityParam, seasonParam] = id;
 
@@ -208,6 +221,9 @@ export async function getStaticProps({ params }) {
    const queryTmdbExtraContent = "&append_to_response=videos,release_dates,content_ratings";
    const tmdbContents = await fetcherTmdb(type, tmdbID, false, 3, queryTmdbExtraContent);
 
+   const completeListProviders =  await fetcherTmdb(type, tmdbID + '/watch/providers', false, 3);
+   const providersWatcher = reduceProviresWatcherList(completeListProviders?.results);
+
    const seasonSelected = type === 'tv' ?
       matchSeasonByMode(tmdbContents.seasons, seasonNumber) : null;
 
@@ -215,7 +231,10 @@ export async function getStaticProps({ params }) {
 
    return {
       props: {
-         contents: reducedContentFinal,
+         contents:{
+            ...reducedContentFinal,
+            providersWatcher,
+         },
          category,
          type,
          actorList,

@@ -11,15 +11,15 @@ export function ProvidersWatch({ providers }) {
       flatrate: "Por plano",
       rent: "Alugar"
    }
-   console.log(providers)
+  
    return providers ? (
       <section className={styles["section"]}>
          {
-            Object.entries(providers).map(([type, streamings]) => {
+            Object.entries(providers).map(([type, streamings], index) => {
                if (type === "link") return "";
 
                return (
-                  <div className={styles["container"]}>
+                  <div key={index} className={styles["container"]}>
                      <h3 className={styles["providers-mode"]}>
                         {traduction[type]}
                      </h3>
